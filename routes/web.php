@@ -21,12 +21,12 @@ Route::get('posts/{post}', function ($slug) {
     $path = __DIR__ . "./../resources/posts/{$slug}.html";
 
     if (! file_exists($path)) {
-        redirect('/');
+        return redirect('/');
     }
 
     $post = file_get_contents($path);
 
     return view('post', [
-        'post' => $post // in your post view, you now have access to $post
+        'post' => $post
     ]);
-});
+})->where('post'. '[A-z_\-]+');
